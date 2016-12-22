@@ -52,8 +52,35 @@ class GameWindow(arcade.Window):
         self.scene_5 = ModelSprite('images/decision_5.png')
         self.scene_5.set_position(300,300)
 
-        self.end_1 = ModelSprite('images/end_1.png')
+        self.end_0 = ModelSprite('images/end_00000.png')
+        self.end_0.set_position(300,300)
+
+        self.end_1 = ModelSprite('images/end_00001.png')
         self.end_1.set_position(300,300)
+
+        self.end_2 = ModelSprite('images/end_00010.png')
+        self.end_2.set_position(300,300)
+
+        self.end_3 = ModelSprite('images/end_00011.png')
+        self.end_3.set_position(300,300)
+
+        self.end_4 = ModelSprite('images/end_00100.png')
+        self.end_4.set_position(300,300)
+
+        self.end_5 = ModelSprite('images/end_00101.png')
+        self.end_5.set_position(300,300)
+
+        self.end_6 = ModelSprite('images/end_00110.png')
+        self.end_6.set_position(300,300)
+
+        self.end_7 = ModelSprite('images/end_00111.png')
+        self.end_7.set_position(300,300)
+
+        self.end_8 = ModelSprite('images/end_01000.png')
+        self.end_8.set_position(300,300)
+
+        self.end_9 = ModelSprite('images/end_01001.png')
+        self.end_9.set_position(300,300)
 ################################################################################
     def on_draw(self):
         arcade.start_render()
@@ -128,7 +155,27 @@ class GameWindow(arcade.Window):
                 self.scene_5.draw()
 ################################################################################
         else :
-            self.end_1.draw()
+            a = (self.world.page_1*16) + (self.world.page_2*8) + (self.world.page_3*4) + (self.world.page_4*2) + (self.world.page_5*1)
+            if a == 0 or a == 12 or a == 14:
+                self.end_0.draw()
+            if a == 1 or a == 25 or a == 27:
+                self.end_1.draw()
+            if a == 2 or a == 18 or a == 26 or a == 30:
+                self.end_2.draw()
+            if a == 3 or a == 19 or a == 31:
+                self.end_3.draw()
+            if a == 4 or a == 20 or a == 28:
+                self.end_4.draw()
+            if a == 5 or a == 17 or a == 29:
+                self.end_5.draw()
+            if a == 6 or a == 10 or a == 22:
+                self.end_6.draw()
+            if a == 7 or a == 21 or a == 23:
+                self.end_7.draw()
+            if a == 8 or a == 16 or a == 24:
+                self.end_8.draw()
+            if a == 9 or a == 15 or a == 11 or a== 13:
+                self.end_9.draw()
             arcade.draw_text("Press R key to restart", 400, 10, arcade.color.WHITE, 15)
 ################################################################################
     def get_random(self):
