@@ -1,5 +1,6 @@
 import arcade
 import random
+import msvcrt as m
 from models import World
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 600
@@ -50,6 +51,9 @@ class GameWindow(arcade.Window):
 
         self.scene_5 = ModelSprite('images/decision_5.png')
         self.scene_5.set_position(300,300)
+
+        self.end_1 = ModelSprite('images/end_1.png')
+        self.end_1.set_position(300,300)
 ################################################################################
     def on_draw(self):
         arcade.start_render()
@@ -123,7 +127,9 @@ class GameWindow(arcade.Window):
             elif self.i5 == 5:
                 self.scene_5.draw()
 ################################################################################
-
+        else :
+            self.end_1.draw()
+            arcade.draw_text("Press R key to restart", 400, 10, arcade.color.WHITE, 15)
 ################################################################################
     def get_random(self):
         if self.world.b1 == False and self.world.state == 1:
@@ -149,36 +155,86 @@ class GameWindow(arcade.Window):
             self.i5 = self.L[0]
 ################################################################################
     def on_key_press(self, key, key_modifiers):
-        #Left is -1
+        #Left is 0
         if self.world.state == 1:
             if key == arcade.key.LEFT:
-                self.world.scene_1 = -1
+                self.world.scene_1 = 0
+                self.world.check_page(self.i,1)
             if key == arcade.key.RIGHT:
                 self.world.scene_1 = 1
+                self.world.check_page(self.i,1)
         if self.world.state == 2:
             if key == arcade.key.LEFT:
-                self.world.scene_2 = -1
+                self.world.scene_2 = 0
+                self.world.check_page(self.i2,2)
             if key == arcade.key.RIGHT:
                 self.world.scene_2 = 1
+                self.world.check_page(self.i2,2)
         if self.world.state == 3:
             if key == arcade.key.LEFT:
-                self.world.scene_3 = -1
+                self.world.scene_3 = 0
+                self.world.check_page(self.i3,3)
             if key == arcade.key.RIGHT:
                 self.world.scene_3 = 1
+                self.world.check_page(self.i3,3)
         if self.world.state == 4:
             if key == arcade.key.LEFT:
-                self.world.scene_3 = -1
+                self.world.scene_4 = 0
+                self.world.check_page(self.i4,4)
             if key == arcade.key.RIGHT:
-                self.world.scene_3 = 1
+                self.world.scene_4 = 1
+                self.world.check_page(self.i4,4)
         if self.world.state == 5:
             if key == arcade.key.LEFT:
-                self.world.scene_3 = -1
+                self.world.scene_5 = 0
+                self.world.check_page(self.i5,5)
             if key == arcade.key.RIGHT:
-                self.world.scene_3 = 1
+                self.world.scene_5 = 1
+                self.world.check_page(self.i5,5)
         self.world.on_key_press(key, key_modifiers)
+        self.print_boolean()
+
+    def print_boolean(self):
+        print('state ',self.world.state)
+        print('scene1 ',self.world.scene_1,' page ',self.world.page_1)
+        print('scene2 ',self.world.scene_2,' page ',self.world.page_2)
+        print('scene3 ',self.world.scene_3,' page ',self.world.page_3)
+        print('scene4 ',self.world.scene_4,' page ',self.world.page_4)
+        print('scene5 ',self.world.scene_5,' page ',self.world.page_5)
 
     def on_key_release(self, key, key_modifiers):
         self.world.on_key_release(key, key_modifiers)
+
+    def wait(self):
+        m.getch()
+
+    def set_answer(self,scene,state):
+        if state == 1:
+            a = self.world.scene_1 == -1
+        elif state == 2:
+            a = self.world.scene_2 == -1
+        elif state == 3:
+            a = self.world.scene_3 == -1
+        elif state == 4:
+            a = self.world.scene_4 == -1
+        elif state == 5:
+            a = self.world.scene_5 == -1
+
+        if scene == self.scene_1:
+            #self.wait()
+            self.world.page_1 = self.world.scene_1
+        if scene == self.scene_2:
+            #self.wait()
+            self.world.page_2 = self.world.scene_2
+        if scene == self.scene_3:
+            #self.wait()
+            self.world.page_3 = self.world.scene_3
+        if scene == self.scene_4:
+            #self.wait()
+            self.world.page_4 = self.world.scene_4
+        if scene == self.scene_5:
+            #self.wait()
+            self.world.page_5 = self.world.scene_5
 
 if __name__ == '__main__':
     window = GameWindow(SCREEN_WIDTH, SCREEN_HEIGHT)
