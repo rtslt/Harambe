@@ -1,6 +1,5 @@
 import arcade
 import random
-import msvcrt as m
 from models import World
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 600
